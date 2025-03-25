@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-lg-3">
+        <div class="wrapper-left">
+            <app-navbar></app-navbar>
+        </div>
+    </div>
+    <div class="col-lg-6">
+
+        <h2> User Tweet </h2>
+        <hr>
+        <div class="card" *ngFor="let tweet of userTweets">
+            <h5 class="card-header"><a href="/tweet/{{tweet.tweetUsername}}">
+                {{tweet.tweetUsername}}</a></h5>
+            <div class="card-body">
+              <h5 class="card-title">{{tweet.content}}</h5>
+              <p class="card-text">{{tweet.timeStamp | date:'full'}}</p>
+              <p class="card-text"*ngFor="let tag of tweet.tags">#{{tag.tag}}</p> 
+              <a href="#" class="btn btn-primary">Reply</a>
+                <div class="card" *ngFor="let reply of tweet.reply">
+                    <h6 class="card-header">
+                        {{reply.replyUsername}}</h6>
+                    <div class="card-body">
+                        <h6 class="card-title">{{reply.reply}}</h6>
+                        <p class="card-text">{{reply.timeStamp | date:'full'}}</p>
+                        <p class="card-text"><button class="btn btn-primary">Like</button> {{reply.liked}}</p>
+                        <p class="card-text" *ngFor="let replytag of reply.tags">#{{replytag.tag}}</p>
+                    </div>
+                </div>
+            </div>
+          </div>
+    </div>
+    <div class="col-lg-3"></div>
+</div>

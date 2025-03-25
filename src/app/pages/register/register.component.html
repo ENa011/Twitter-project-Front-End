@@ -1,0 +1,103 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="wrapper">
+            <h2 class="text-center">Registeration</h2>
+            <div class="{{alertClass}}" role="alert">
+                {{responseText}}
+            </div>
+            <form #registerForm="ngForm" (submit)="onSubmitHandler()">
+                <div class="form-group">
+                    <label for="">user name</label>
+                    <input type="text" name="username" class="form-control" [(ngModel)]="userModel.username"
+                    #username = "ngModel" required [class.is-invalid]="username.invalid && username.touched">
+                    <small class="text-danger" [class.d-none]="username.untouched || username.valid">
+                        user name is required
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="">email</label>
+                    <input type="text" name="email" class="form-control" [(ngModel)]="userModel.email" #email="ngModel" required
+                        pattern="[a-z0-9.%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [class.is-invalid]="email.invalid && email.touched">
+                    <div *ngIf = "email.invalid && email.touched">
+                        <small class="text-danger" *ngIf = "email.errors?.['required']">
+                            email is required
+                        </small>
+                        <small class="text-danger" *ngIf = "email.errors?.['pattern']">
+                            email should be valid
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="">password</label>
+                    <input type="password" name="password" class="form-control" [(ngModel)]="userModel.password"
+                    #password = "ngModel" minlength="6" required [class.is-invalid]="password.invalid && password.touched">
+                    <div *ngIf = "password.touched && password.invalid">
+                        <small class="text-danger" *ngIf = "password.errors?.['required']">
+                            paswword is required
+                        </small>
+                        <small class="text-danger" *ngIf = "password.errors?.['minlength']">
+                            paswword at least need to be 6 characters
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="">first name</label>
+                    <input type="text" name="firstname" class="form-control" [(ngModel)]="userModel.firstname"
+                    #firstname = "ngModel" required [class.is-invalid]="firstname.invalid && firstname.touched">
+                    <small class="text-danger" [class.d-none]="firstname.untouched || firstname.valid">
+                        first name is required
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="">last name</label>
+                    <input type="text" name="lastname" class="form-control" [(ngModel)]="userModel.lastname"
+                    #lastname = "ngModel" required [class.is-invalid]="lastname.invalid && lastname.touched">
+                    <small class="text-danger" [class.d-none]="lastname.untouched || lastname.valid">
+                        last name is required
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="">contact number</label>
+                    <input type="text" name="contactNumber" class="form-control" [(ngModel)]="userModel.contactNumber" 
+                    pattern="[0-9]{10}"
+                    #contactNumber = "ngModel" required [class.is-invalid]="contactNumber.invalid && contactNumber.touched">
+                    <div *ngIf = "contactNumber.invalid && contactNumber.touched">
+                        <small class="text-danger" *ngIf = "contactNumber.errors?.['required']">
+                            contact number is required
+                        </small>
+                        <small class="text-danger" *ngIf = "contactNumber.errors?.['pattern']">
+                            contact number should be valid
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="">confirm password</label>
+                    <input type="password" name="confirmPassword" class="form-control" [(ngModel)]="userModel.confirmPassword"
+                    #confirmPassword = "ngModel" minlength="6" required [class.is-invalid]="confirmPassword.invalid && confirmPassword.touched">
+                    <div *ngIf = "confirmPassword.touched && confirmPassword.invalid">
+                        <small class="text-danger" *ngIf = "confirmPassword.errors?.['required']">
+                            paswword is required
+                        </small>
+                        <small class="text-danger" *ngIf = "confirmPassword.errors?.['minlength']">
+                            paswword at least need to be 6 characters
+                        </small>
+                    </div>
+                </div>
+                <button type="submit" value="register" class="btn btn-primary btn-block" [disabled]="registerForm.invalid">register</button>
+                <p>Already registered? <span><a href="/login"> click here</a></span></p>
+            </form>
+        </div>           
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+
+<!--username?:String;
+    email?:String;
+    password?:String;
+    contactNumber?:String;
+    firstName?:String;
+    lastName?:String;
+    confirmPassword?:String;-->
