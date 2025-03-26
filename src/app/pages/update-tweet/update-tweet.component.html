@@ -5,9 +5,9 @@
         </div>
     </div>
     <div class="col-lg-6">
-        <h2> Tweet</h2>
+        <h2> update</h2>
         <hr>
-        <form [formGroup]="tweetForm" (submit)="onSubmitHandler()">
+        <form [formGroup]="updateForm" (submit)="onSubmitHandler()">
         <div class="form-group">
             <div class="card">
                 <h5 class="card-header">{{myToken}}</h5>
@@ -17,10 +17,8 @@
                     <div *ngIf="content?.errors && content?.touched">
                         <small class="text-danger" *ngIf="content?.errors?.['required']">tweet can't be empty</small>
                     </div>
-                    <label for="">tags</label>
-                    <textarea class="form-control" name="tags" formControlName="tags" id="exampleFormControlTextarea1" rows="1"></textarea>
                     <hr>
-                  <button type="submit" class="btn btn-primary" [disabled]="tweetForm.invalid">tweet</button>
+                  <button type="submit" class="btn btn-primary" [disabled]="updateForm.invalid">update</button>
                 </div>
               </div>
           </div>
@@ -29,4 +27,3 @@
     </div>
     <div class="col-lg-3"></div>
 </div>
-

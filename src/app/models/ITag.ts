@@ -1,4 +1,4 @@
 export interface ITag{
-    id:number;
-    tag:String;
+    id?:number;
+    tag?:String;
 }

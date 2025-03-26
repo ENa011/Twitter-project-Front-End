@@ -8,6 +8,7 @@ import { TweetComponent } from './pages/tweet/tweet.component';
 import { UserTweetComponent } from './pages/user-tweet/user-tweet.component';
 import { ReplyComponent } from './pages/reply/reply.component';
 import { MyTweetComponent } from './pages/my-tweet/my-tweet.component';
+import { UpdateTweetComponent } from './pages/update-tweet/update-tweet.component';
 export const routes: Routes = [
     {path: '', redirectTo: 'home', pathMatch:'full'},
     {path:'home', component: HomeComponent},
@@ -18,5 +19,6 @@ export const routes: Routes = [
     {path:'tweet', component: TweetComponent},
     {path:'tweet/:user', component: UserTweetComponent},
     {path:'myTweet/:user', component: MyTweetComponent},
-    {path:'reply/:user', component: ReplyComponent}
+    {path:'reply/:user/:id', component: ReplyComponent},
+    {path:'update/:user/:id', component:UpdateTweetComponent}
 ];

@@ -15,7 +15,8 @@
                   <h5 class="card-title">{{tweet.content}}</h5>
                   <p class="card-text">{{tweet.timeStamp | date:'full'}}</p>
                   <p class="card-text"*ngFor="let tag of tweet.tags">#{{tag.tag}}</p> 
-                  <a href="#" class="btn btn-primary">Reply</a>
+                  <button (click)="onReplyHandler(tweet.tweetUsername, tweet.id)" class="btn btn-primary">
+                    Reply</button>
                     <div class="card" *ngFor="let reply of tweet.reply">
                         <h6 class="card-header">
                             {{reply.replyUsername}}</h6>

@@ -3,7 +3,7 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DataService } from '../../services/data.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-tweet',
@@ -17,10 +17,19 @@ export class MyTweetComponent {
 
   userTweets:any[]= [];
 
-  constructor(private dataService: DataService, private activateRoute: ActivatedRoute){
+  constructor(private dataService: DataService, private activateRoute: ActivatedRoute, private router:Router){
     this.user = this.activateRoute.snapshot.paramMap.get('user');
     this.dataService.getUserTweet(this.user).subscribe((data:any)=> {
        this.userTweets = data;
     })
+  }
+
+  onUpdateHandler(name:string, id:number){
+    this.router.navigateByUrl('/update/' + name + '/' + id);
+  }
+
+  onDeleteHandler(name:string, id:number){
+    this.dataService.deleteTweet(name, id);
+    this.router.navigateByUrl('/');
   }
 }

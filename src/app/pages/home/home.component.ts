@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ITweet } from '../../models/ITweet';
 import { ITag } from '../../models/ITag';
 import { IReply } from '../../models/IReply';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,7 @@ export class HomeComponent {
 
   tweets:any[] =[];
   
-  constructor(private dataService: DataService){
+  constructor(private dataService: DataService, private router: Router){
       this.dataService.getAllTweet().subscribe((data:any)=> {
       this.tweets = data;
     })
@@ -25,6 +26,10 @@ export class HomeComponent {
 
   onLike(name:string, id:number){
     return this.dataService.putLikeReply(name, id, null);
+  }
+
+  onReplyHandler(name:string, id:number){
+    this.router.navigateByUrl('/reply/' + name +'/' +id);
   }
   
 }

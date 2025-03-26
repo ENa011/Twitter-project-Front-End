@@ -24,11 +24,8 @@ export class DataService {
   }
 
   postPassword(name?:String, data?:any,){
-    const headers = new HttpHeaders();
-    headers.append('Access-Control-Allow-Headers', 'Content-Type');
-    headers.append('Access-Control-Allow-Methods','*');
-    headers.append('Access-Control-Allow-Origin', '*');
-    return this.httpClient.put('http://localhost:8080/api/v1.0/tweets/' + name + '/forgot', data, {headers: headers});
+    
+    return this.httpClient.put('http://localhost:8080/api/v1.0/tweets/' + name + '/forgot', data);
   }
 
   postTweet(name:String, data:any){
@@ -41,5 +38,17 @@ export class DataService {
 
   putLikeReply(name:string, id:number, data:any){
     return this.httpClient.put('http://localhost:8080/api/v1.0/tweets/' + name + '/like/' + id, data);
+  }
+
+  postReply(name:string, id:number, data:any){
+    return this.httpClient.post('http://localhost:8080/api/v1.0/tweets/' + name + '/reply/' + id, data)
+  }
+
+  updateTweet(name:string, id:number, data:any){
+    return this.httpClient.put('http://localhost:8080/api/v1.0/tweets/'+ name +'/update/' + id, data)
+  }
+
+  deleteTweet(name:string, id:number){
+    return this.httpClient.delete('http://localhost:8080/api/v1.0/tweets/'+ name +'/delete/' + id)
   }
 }
