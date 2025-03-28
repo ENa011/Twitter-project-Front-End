@@ -37,7 +37,6 @@ export class PasswordComponent {
   onSubmitHandler(){
 
     let token = localStorage.getItem('token');
-    console.log(this.passwordForm.value);
         if(token){
           try {
             const decodedToken = jwtDecode(token);

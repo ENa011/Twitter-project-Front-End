@@ -29,7 +29,9 @@ export class MyTweetComponent {
   }
 
   onDeleteHandler(name:string, id:number){
-    this.dataService.deleteTweet(name, id);
-    this.router.navigateByUrl('/');
+    this.dataService.deleteTweet(name, id).subscribe((data)=>{
+      this.router.navigateByUrl('/');
+    });
+    
   }
 }

@@ -23,19 +23,24 @@ export class TweetComponent {
   
   tweetForm:FormGroup;
   myToken:any;
-  mySet: Set<ITag> = new Set();
+
   input:any;
 
   constructor(private formBuilder: FormBuilder,
     private dataService:DataService, private router: Router, private authService: AuthService){
       this.tweetForm = this.formBuilder.group({
         content:[null, [Validators.required]],
-        tags: ['']
+        tags: []
       });
       this.myToken = authService.decodeToken();
   }
 
-  
+  private stringToTagObjects(inputString: string): { tag: string }[] {
+    if(inputString != null){
+    const words = inputString.split(' ');
+    return words.map(word => ({ tag: word }));
+    } else return [];
+  }
 
   get content(){
     return this.tweetForm.get('content');
@@ -46,13 +51,11 @@ export class TweetComponent {
   }
 
   onSubmitHandler(){
-    const inputArray = this.tweetForm.get('tags')?.value.split(' ').map((item: string) => {tag:item});
-    this.mySet = new Set(inputArray);
-    this.input = {
-      content: this.tweetForm.get('content'),
-      tags: this.mySet
-    }
-    return this.dataService.postTweet(this.myToken, this.input.value).subscribe((data)=>{
+    
+    const tagObjects = this.stringToTagObjects(this.tweetForm.get('tags')?.value);
+    
+    this.tweetForm.patchValue({tags: tagObjects})
+    return this.dataService.postTweet(this.myToken, this.tweetForm.value).subscribe((data)=>{
       this.router.navigateByUrl('/');
     })
   }

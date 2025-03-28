@@ -25,7 +25,7 @@ export class DataService {
 
   postPassword(name?:String, data?:any,){
     
-    return this.httpClient.put('http://localhost:8080/api/v1.0/tweets/' + name + '/forgot', data);
+    return this.httpClient.put('http://localhost:8080/api/v1.0/tweets/' + name + '/forgot', data, {responseType: 'text'});
   }
 
   postTweet(name:String, data:any){
@@ -36,7 +36,7 @@ export class DataService {
     return this.httpClient.get('http://localhost:8080/api/v1.0/tweets/' + name);
   }
 
-  putLikeReply(name:string, id:number, data:any){
+  putLikeReply(name:string, id:number, data?:any){
     return this.httpClient.put('http://localhost:8080/api/v1.0/tweets/' + name + '/like/' + id, data);
   }
 
@@ -49,6 +49,6 @@ export class DataService {
   }
 
   deleteTweet(name:string, id:number){
-    return this.httpClient.delete('http://localhost:8080/api/v1.0/tweets/'+ name +'/delete/' + id)
+    return this.httpClient.delete('http://localhost:8080/api/v1.0/tweets/'+ name +'/delete/' + id, {responseType: 'text'})
   }
 }

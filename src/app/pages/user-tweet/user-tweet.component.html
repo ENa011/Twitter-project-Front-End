@@ -15,7 +15,7 @@
               <h5 class="card-title">{{tweet.content}}</h5>
               <p class="card-text">{{tweet.timeStamp | date:'full'}}</p>
               <p class="card-text"*ngFor="let tag of tweet.tags">#{{tag.tag}}</p> 
-              <button (click)="onReplyHandler(tweet.tweetUsername, tweet.id)" class="btn btn-primary">
+              <button (click)="onReplyHandler(tweet.tweetUsername, tweet.id)" class="btn btn-primary" [disabled]="!authService.checkToken()">
                 Reply</button>
                 <div class="card" *ngFor="let reply of tweet.reply">
                     <h6 class="card-header">
@@ -23,7 +23,8 @@
                     <div class="card-body">
                         <h6 class="card-title">{{reply.reply}}</h6>
                         <p class="card-text">{{reply.timeStamp | date:'full'}}</p>
-                        <p class="card-text"><button class="btn btn-primary">Like</button> {{reply.liked}}</p>
+                        <p class="card-text"><button (click)="onLike(tweet.tweetUsername, reply.id)" class="btn btn-primary" [disabled]="!authService.checkToken()">
+                            Like</button> {{reply.liked}}</p>
                         <p class="card-text" *ngFor="let replytag of reply.tags">#{{replytag.tag}}</p>
                     </div>
                 </div>

@@ -48,14 +48,18 @@ export class ReplyComponent {
     return this.replyForm.get('tags');
   }
 
+  private stringToTagObjects(inputString: string): { tag: string }[] {
+    if(inputString != null){
+    const words = inputString.split(' ');
+    return words.map(word => ({ tag: word }));
+    } else return [];
+  }
+
   onSubmitHandler(){
-    const inputArray = this.replyForm.get('tags')?.value.split(' ').map((item: string) => {tag:item});
-    this.mySet = new Set(inputArray);
-    this.input = {
-      content: this.replyForm.get('reply'),
-      tags: this.mySet
-    }
-    return this.dataService.postReply(this.user, this.id, this.input.value).subscribe((data)=>{
+    const tagObjects = this.stringToTagObjects(this.replyForm.get('tags')?.value);
+    
+    this.replyForm.patchValue({tags: tagObjects})
+    return this.dataService.postReply(this.user, this.id, this.replyForm.value).subscribe((data)=>{
       this.router.navigateByUrl('/');
     })
   }

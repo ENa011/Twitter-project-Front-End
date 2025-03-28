@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DataService } from '../../services/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-user-tweet',
@@ -16,7 +17,7 @@ export class UserTweetComponent {
 
   userTweets:any[]= [];
 
-  constructor(private dataService: DataService, private activateRoute: ActivatedRoute, private router: Router){
+  constructor(private dataService: DataService, private activateRoute: ActivatedRoute, private router: Router, public authService: AuthService){
     this.user = this.activateRoute.snapshot.paramMap.get('user');
     this.dataService.getUserTweet(this.user).subscribe((data:any)=> {
        this.userTweets = data;
@@ -25,5 +26,10 @@ export class UserTweetComponent {
 
   onReplyHandler(name:string, id:number){
     this.router.navigateByUrl('/reply/' + name +'/' +id);
+  }
+
+  onLike(name:string, id:number){
+    return this.dataService.putLikeReply(name, id).subscribe((data)=>{window.location.reload();});
+    
   }
 }
